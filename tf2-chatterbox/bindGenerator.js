@@ -1,6 +1,3 @@
-// TODO: Implement a fix where selecting "random" causes the phrases to not
-//       shuffle when only the "say phrase" key is pressed.
-
 // Prevent the form from resetting itself when the user submits it
 $("#generator-form").submit(function(event){
    event.preventDefault();
@@ -19,7 +16,7 @@ function createBinds() {
   var outputField  = document.getElementById("results");
 
   // ------------------------------
-  // BEGIN ERROR CHECKING BOYEEE
+  // BEGIN ERROR CHECKING
   // ------------------------------
   if ( userBindList.indexOf("\"") != -1 || userBindName.indexOf("\"") != -1 ) {
     return quotesFound();
@@ -103,7 +100,6 @@ function createBinds() {
     output += 'bind a "+moveleft; ' + cycleName + '"\n';
     output += 'bind d "+moveright; ' + cycleName + '"\n';
     output += '\n';
-
   }
   else {
     // create the actual alias (e.g. alais "test" "test0")
@@ -130,26 +126,36 @@ function createBinds() {
 // Creates a shitload of aliases in order to randomize which bind will be chosen
 function generateRandomBinds( bindArray, bindName ) {
 
+  // create an empty array that we'll fill with lines of aliases for randomizing
   var arrayForRandomizing = [];
 
   for ( var i = 0; i < bindArray.length; ++i ) {
+    // initialize the line we're going to push into the array we're returning
     var toPush;
 
+    // e.g. myBind_diceroll_3
+    var diceName = bindName + "_diceroll_" + i;
+    var nextDiceName = "";
+
     if ( i != bindArray.length - 1 ) {
-      var diceName = bindName + "_diceroll_" + i;
-      var nextDiceName = bindName + "_diceroll_" + (i + 1);
-      toPush = 'alias "' + diceName + '" "alias ' + bindName + ' ' + bindName + i + '; alias ' + bindName + '_cycle ' + nextDiceName + '"';
+      // e.g. myBind_diceroll_1
+      nextDiceName = bindName + "_diceroll_" + (i + 1);
     }
     else {
       // If we're in the last item in the array
-      var diceName = bindName + "_diceroll_" + (bindArray.length - 1);
-      var nextDiceName = bindName + "_diceroll_" + "0";
-      toPush = 'alias "' + diceName + '" "alias ' + bindName + ' ' + bindName + i + '; alias ' + bindName + '_cycle ' + nextDiceName + '"';
+      // myBind_diceroll_0
+      nextDiceName = bindName + "_diceroll_" + "0";
     }
 
+    // Create full line
+    // e.g. alias "myBind_diceroll_3" "alias myBind myBind3; alias myBind_cycle myBind_diceroll_4"
+    toPush = 'alias "' + diceName + '" "alias ' + bindName + ' ' + bindName + i + '; alias ' + bindName + '_cycle ' + nextDiceName + '"';
+
+    // push the line we just created into the array to return
     arrayForRandomizing.push( toPush );
   }
 
+  // return that whole goddamn array
   return arrayForRandomizing;
 
 }
