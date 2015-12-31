@@ -50,6 +50,7 @@ function createBinds() {
     if ( !userBindRand ) {
       var newAlias = "";
       if ( i + 1 < userBindList.length ) {
+        // alias myAlias myAlias01"
         newAlias = "alias " + userBindName + " " + userBindName + (i + 1) + '"';
       }
       else {
@@ -94,6 +95,7 @@ function createBinds() {
 
     output += "// Add some randomness by adding the shuffle to movement.\n";
     output += "// WARNING: If you use something like the null-cancelling movement script, you should delete this.\n";
+    // myBind_cycle
     var cycleName = userBindName + '_cycle';
     output += 'bind w "+forward; ' + cycleName + '"\n';
     output += 'bind s "+back; ' + cycleName + '"\n';
@@ -108,8 +110,10 @@ function createBinds() {
 
   // if the user wants to bind their script to a key
   if ( userBindKey != "" ) {
-    // bind "k" "test; test_cycle"
-    output += '\nbind "' + userBindKey + '" "' + userBindName + '"\n';
+    // myBind; myBind_cycle
+    var toBind = userBindName + "; " + userBindName + "_cycle"
+    // bind "kp_pgup" "myBind; myBind_cycle"
+    output += '\nbind "' + userBindKey + '" "' + toBind + '"\n';
   }
 
   // Add the watermark if people want it
@@ -118,7 +122,6 @@ function createBinds() {
     output += coolWaterMark();
   }
 
-  // TODO: Check if this TRIM works
   outputField.value = output.trim();
 
 }
