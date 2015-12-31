@@ -1,3 +1,6 @@
+// Version number
+var version = "1.0";
+
 // Prevent the form from resetting itself when the user submits it
 $("#generator-form").submit(function(event){
    event.preventDefault();
@@ -69,6 +72,10 @@ function createBinds() {
   // ------------------------------
   var output = "";
 
+  // Add a comment so the user knows what version the script was generated with
+  output += "// Generated with TF2 Chatterbox v" + version +"\n";
+  output += "// http://ralphorama.github.io/tf2-chatterbox/\n\n";
+
   for ( var i = 0; i < userBindList.length; ++i ) {
     output += userBindList[i] + "\n";
   }
@@ -103,7 +110,6 @@ function createBinds() {
     output += 'bind s "+back; ' + cycleName + '"\n';
     output += 'bind a "+moveleft; ' + cycleName + '"\n';
     output += 'bind d "+moveright; ' + cycleName + '"\n';
-    output += '\n';
   }
   else {
     // create the actual alias (e.g. alais "test" "test0")
