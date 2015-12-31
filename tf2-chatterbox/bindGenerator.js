@@ -160,7 +160,7 @@ function coolWaterMark() {
   toReturn += 'echo "                \\/      \\/    \\/     \\/ "\n';
   toReturn += 'echo "Congrats! You just loaded some cool binds."\n';
   // TODO: Add Website Plug
-  toReturn += 'echo "Generated with love at "\n';
+  toReturn += 'echo "Generated with love at http://ralphorama.github.io/tf2-chatterbox/"\n';
 
   return toReturn;
 }
