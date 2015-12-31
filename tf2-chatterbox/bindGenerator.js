@@ -1,3 +1,6 @@
+// TODO: Add alert if message is longer than 128 characters, as it can't be
+// fully displayed if that's the case.
+
 // Version number
 var version = "1.0";
 
