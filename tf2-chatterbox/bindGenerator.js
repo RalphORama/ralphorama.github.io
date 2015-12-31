@@ -1,12 +1,9 @@
-// TODO: Add alert if message is longer than 128 characters, as it can't be
-// fully displayed if that's the case.
-
 // Version number
-var version = "1.0";
+var version = "1.1";
 
 // Prevent the form from resetting itself when the user submits it
 $("#generator-form").submit(function(event){
-   event.preventDefault();
+  event.preventDefault();
 });
 
 function createBinds() {
@@ -22,7 +19,7 @@ function createBinds() {
   var outputField  = document.getElementById("results");
 
   // ------------------------------
-  // BEGIN ERROR CHECKING
+  // BEGIN FORM VALIDATION
   // ------------------------------
   if ( userBindList.indexOf("\"") != -1 || userBindName.indexOf("\"") != -1 ) {
     return quotesFound();
@@ -36,12 +33,20 @@ function createBinds() {
     return emptyBindName();
   }
   // ------------------------------
-  // END ERROR CHECKING
+  // END FORM VALIDATION
   // ------------------------------
 
   // Populate the array of aliases
   userBindList = userBindList.split("\n");
   for ( var i = 0; i < userBindList.length; ++i ) {
+    // Check to make sure the message isn't too long
+    // TF2 has a max char count of 128
+    if ( userBindList[i].length > 128 ) {
+      alert( "One of your messages is longer than 128 characters, the maximum length for a chat message." );
+      selectTextAreaLine( document.getElementById("phrases"), i );
+      return false;
+    }
+
     // create Bind Number Name, e.g. mybindlist1, mybindlist23
     var bindNumber = '"' + userBindName + i +'" ';
 
@@ -214,7 +219,7 @@ function resetForm() {
 }
 
 // What to do if we find quotes in the user's input
-function quotesFound() {
+function quotesFound( line ) {
 
   // alert the user that they forgot to enter input
   alert('Quotes found in input.');
