@@ -11,7 +11,7 @@
   <body>
   <div id="container">
     <div id="content">
-      <h1>TF2 ChatterBox</h1>
+      <h1 id="header-one">TF2 ChatterBox</h1>
       <h2>By RalphORama (/u/ralphorama)</h2>
 
       <hr>
@@ -216,5 +216,9 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Load Script Form -->
     <script type="text/javascript" src="bindGenerator.js"></script>
+    <!-- Notify Users of Version -->
+    <script type="text/javascript">
+      document.getElementById("header-one").innerHTML = "TF2 ChatterBox v" + version;
+    </script>
   </body>
 </html>
