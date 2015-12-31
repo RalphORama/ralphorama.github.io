@@ -12,6 +12,7 @@ body {
 
   padding: 0;
   margin: 0;
+  margin-bottom: 5px;
 
   font-family: monospace;
 }
@@ -32,8 +33,6 @@ h1, h2, h3, h4, h5, h6 {
 table {
   border-collapse: collapse;
   table-layout: fixed;
-
-  margin-bottom: 5px;
 }
 
 table, th, td {
