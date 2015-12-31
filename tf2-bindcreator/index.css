@@ -84,12 +84,13 @@ textarea {
   text-align: center;
 }
 
-.text-hilight {
-  color: #E74C4C;
+.required {
+  font-weight: 800;
+  color: #FF0000;
 }
 
-.number {
-  font-weight: 800;
+.text-hilight {
+  color: #E74C4C;
 }
 
 .donate {
