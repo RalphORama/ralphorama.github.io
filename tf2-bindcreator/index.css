@@ -72,8 +72,9 @@ textarea {
   min-width: 800px;
 }
 
-#phrases {
-
+#github {
+  margin: auto;
+  font-size: 1.2em;
 }
 
 /*
