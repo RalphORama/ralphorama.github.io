@@ -1,3 +1,6 @@
+// TODO: Implement a fix where selecting "random" causes the phrases to not
+//       shuffle when only the "say phrase" key is pressed.
+
 // Prevent the form from resetting itself when the user submits it
 $("#generator-form").submit(function(event){
    event.preventDefault();
@@ -119,7 +122,8 @@ function createBinds() {
     output += coolWaterMark();
   }
 
-  outputField.value = output;
+  // TODO: Check if this TRIM works
+  outputField.value = output.trim();
 
 }
 
@@ -160,7 +164,6 @@ function coolWaterMark() {
   toReturn += 'echo "|____/\\____(____  /\\____ |\\___  >____ | "\n';
   toReturn += 'echo "                \\/      \\/    \\/     \\/ "\n';
   toReturn += 'echo "Congrats! You just loaded some cool binds."\n';
-  // TODO: Add Website Plug
   toReturn += 'echo "Generated with love at http://ralphorama.github.io/tf2-chatterbox/"\n';
 
   return toReturn;
