@@ -3,6 +3,10 @@
   <head>
     <title>ChatterBox</title>
     <link rel="stylesheet" type="text/css" href="index.css">
+
+    <meta name="description" content="A simple webapp used to create chat scripts for Team Fortress 2.">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   </head>
   <body>
   <div id="container">
@@ -33,7 +37,7 @@
                 <li>Avoid the use of the quote (") character.</li>
               </ul>
               <li>Name your bind using the "Bind Name" box.</li>
-              <li>Choose whether your bind will say a random message.</li>
+              <li>Choose whether your bind display messages at random.</li>
               <li>If you'd like, add a value for the key to trigger your bind.</li>
               <li>Disable the watermark if you like.</li>
               <li>Click "Generate!"</li>
@@ -59,7 +63,109 @@
             <label>Randomize Order? <input type="checkbox" id="randomize" form="generator-form"></label>
           </td>
           <td>
-            <label>Key to bind (blank for none): <input type="text" id="bindKey" form="generator-form" placeholder="e.g. kp_pgdn"></label>
+            <label>Key to bind (blank for none): <select id="bindKey" form="generator-form">
+              <option value="">none</option>
+              <option value="space">space</option>
+              <option value="capslock">capslock</option>
+              <option value="escape">escape</option>
+              <option value="f1">f1</option>
+              <option value="f2">f2</option>
+              <option value="f3">f3</option>
+              <option value="f4">f4</option>
+              <option value="f5">f5</option>
+              <option value="f6">f6</option>
+              <option value="f7">f7</option>
+              <option value="f8">f8</option>
+              <option value="f9">f9</option>
+              <option value="f10">f10</option>
+              <option value="f11">f11</option>
+              <option value="f12">f12</option>
+              <option value="pause">pause</option>
+              <option value="`">`</option>
+              <option value="-">-</option>
+              <option value="backspace">backspace</option>
+              <option value="tab">tab</option>
+              <option value="]">]</option>
+              <option value="[">[</option>
+              <option value="/">/</option>
+              <option value="semicolon">semicolon</option>
+              <option value="'">'</option>
+              <option value="\">\</option>
+              <option value="shift">shift</option>
+              <option value="enter">enter</option>
+              <option value=""></option>
+              <option value="ctrl">ctrl</option>
+              <option value="alt">alt</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="0">0</option>
+              <option value="a">a</option>
+              <option value="b">b</option>
+              <option value="c">c</option>
+              <option value="d">d</option>
+              <option value="e">e</option>
+              <option value="f">f</option>
+              <option value="g">g</option>
+              <option value="h">h</option>
+              <option value="i">i</option>
+              <option value="j">j</option>
+              <option value="k">k</option>
+              <option value="l">l</option>
+              <option value="m">m</option>
+              <option value="n">n</option>
+              <option value="o">o</option>
+              <option value="p">p</option>
+              <option value="q">q</option>
+              <option value="r">r</option>
+              <option value="s">s</option>
+              <option value="t">t</option>
+              <option value="u">u</option>
+              <option value="v">v</option>
+              <option value="w">w</option>
+              <option value="x">x</option>
+              <option value="y">y</option>
+              <option value="z">z</option>
+              <option value="uparrow">uparrow</option>
+              <option value="downarrow">downarrow</option>
+              <option value="rightarrow">rightarrow</option>
+              <option value="leftarrow">leftarrow</option>
+              <option value="ins">ins</option>
+              <option value="home">home</option>
+              <option value="pgup">pgup</option>
+              <option value="pgdn">pgdn</option>
+              <option value="del">del</option>
+              <option value="end">end</option>
+              <option value="mouse1">mouse1</option>
+              <option value="mouse2">mouse2</option>
+              <option value="mouse3">mouse3</option>
+              <option value="mouse4">mouse4</option>
+              <option value="mouse5">mouse5</option>
+              <option value="mwheelup">mwheelup</option>
+              <option value="mwheeldown">mwheeldown</option>
+              <option value="kp_end">kp_end</option>
+              <option value="kp_downarrow">kp_downarrow</option>
+              <option value="kp_pgdn">kp_pgdn</option>
+              <option value="kp_leftarrow">kp_leftarrow</option>
+              <option value="kp_5">kp_5</option>
+              <option value="kp_rightarrow">kp_rightarrow</option>
+              <option value="kp_home">kp_home</option>
+              <option value="kp_uparrow">kp_uparrow</option>
+              <option value="kp_pgup">kp_pgup</option>
+              <option value="kp_ins">kp_ins</option>
+              <option value="kp_plus">kp_plus</option>
+              <option value="kp_minus">kp_minus</option>
+              <option value="kp_slash">kp_slash</option>
+              <option value="kp_del">kp_del</option>
+              <option value="*">*</option>
+              <option value="kp_enter">kp_enter</option>
+            </select></label>
           </td>
           <td>
             <label>Add Watermark? <input type="checkbox" id="watermark" form="generator-form" checked></label>
