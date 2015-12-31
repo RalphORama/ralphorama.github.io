@@ -95,10 +95,11 @@ function createBinds() {
     output += "// Add some randomness by adding the shuffle to movement.\n";
     output += "// WARNING: If you use something like the null-cancelling movement script, you should delete this.\n";
     var cycleName = userBindName + '_cycle';
-    output += 'bind w "+forward; ' + cycleName + '"';
-    output += 'bind s "+back; ' + cycleName + '"';
-    output += 'bind a "+moveleft; ' + cycleName + '"';
-    output += 'bind d "+moveright; ' + cycleName + '"';
+    output += 'bind w "+forward; ' + cycleName + '"\n';
+    output += 'bind s "+back; ' + cycleName + '"\n';
+    output += 'bind a "+moveleft; ' + cycleName + '"\n';
+    output += 'bind d "+moveright; ' + cycleName + '"\n';
+    output += '\n';
 
   }
   else {
