@@ -59,7 +59,7 @@ function createBinds() {
       userBindList[i] = aliasText + newAlias;
     }
     else {
-      userBindList[i] = aliasText;
+      userBindList[i] = "alias " + bindNumber + "\"say " + userBindList[i] + "\"";
     }
   }
 
