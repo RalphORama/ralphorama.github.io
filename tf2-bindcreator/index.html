@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Team Fortress 2 Bind Creator</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+  <body>
+  <div id="container">
+    <div id="content">
+      <h1>TF2 Chat Flabbergaster</h1>
+      <h2>By RalphORama</h2>
+
+      <hr>
+
+      <form id="generator-form" action="#" onsubmit="return createBinds()" method="post"></form>
+
+      <!-- Put all that form goodness in here -->
+      <table id="generator-table">
+
+        <!-- The header with general information -->
+        <tr id="generator-header">
+          <td class="gen-heading-text" colspan="4">
+            <h3>Follow the instructions to have a good time!</h3>
+          </td>
+        </tr>
+
+        <tr id="generator-subheader">
+          <td colspan="4">
+            <ol>
+              <li>Enter each phrase you want the bind to rotate through below.</li>
+              <ul>
+                <li>Only enter one phrase per line.</li>
+                <li>Avoid the use of the quote (") character.</li>
+              </ul>
+              <li>Name your bind using the "Bind Name" box.</li>
+              <li>Choose whether your bind will say a random message.</li>
+              <li>If you'd like, add a value for the key to trigger your bind.</li>
+              <li>Disable the watermark if you like.</li>
+              <li>Click "Generate!"</li>
+              <li>Copy the contents of the lower text field into your autoexec.cfg (or any other cfg file) in your steamapps/common/team fortress 2/tf/cfg folder.</li>
+              <li>Spam away happily!</li>
+            </ol>
+          </td>
+        </tr>
+
+        <!-- Text Area for phrase input -->
+        <tr>
+          <td colspan="4" >
+            <textarea id="phrases" name="phrases" form="generator-form" placeholder="Enter your phrases here, one per line." rows="10"></textarea>
+          </td>
+        </tr>
+
+        <!-- Additional config buttons -->
+        <tr>
+          <td>
+            <label>Bind Name: <input type="text" id="bindName" form="generator-form" placeholder="e.g. myBindName"></label>
+          </td>
+          <td>
+            <label>Randomize Order? <input type="checkbox" id="randomize" form="generator-form"></label>
+          </td>
+          <td>
+            <label>Key to bind (blank for none): <input type="text" id="bindKey" form="generator-form" placeholder="e.g. kp_pgdn"></label>
+          </td>
+          <td>
+            <label>Add Watermark? <input type="checkbox" id="watermark" form="generator-form" checked></label>
+          </td>
+        </tr>
+
+        <!-- Submit and Reset Buttons -->
+        <tr align="center">
+          <td colspan="3">
+            <input id="submit" type="submit" value="Generate!" form="generator-form">
+          </td>
+          <td>
+            <input id="reset" type="button" value="Reset" form="generator-form" onclick="return resetForm()">
+          </td>
+        </tr>
+
+        <!-- Generated Results -->
+        <tr>
+          <td colspan="4">
+            <textarea readonly="readonly" onclick="this.focus(); this.select()" id="results" name="results" rows="10" placeholder="Your results will show up here." ></textarea>
+          </td>
+        </tr>
+
+        <!-- Begging / Choosing -->
+        <tr>
+          <td colspan="2" align="left">
+            <p>If you found this tool helpful, I'd be forever greatful if you'd send a little something my way:</p>
+          </td>
+          <td align="center">
+            <a class="donate" target="_blank" href="https://steamcommunity.com/tradeoffer/new/?partner=61837215&token=MMYNXem5">Send me some hats!</a>
+          </td>
+          <td align="center">
+            <a class="donate" target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=rama%2eo%2eralph%40gmail%2ecom&lc=US&item_name=Donate%20to%20Ralph&no_note=0&cn=Add%20a&no_shipping=1&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted">Send me some cash!</a>
+          </td>
+        </tr>
+      </table>
+      <!-- End of the form goodness -->
+    </div>
+    </div>
+
+    <!-- Load JQuery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Load Script Form -->
+    <script type="text/javascript" src="bindGenerator.js"></script>
+  </body>
+</html>
