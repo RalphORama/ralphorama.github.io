@@ -87,8 +87,10 @@ function createBinds() {
 
     output += "\n";
 
+    // alias "myBind_cycle" "myBind_diceroll_0"
     output += 'alias "' + userBindName + '_cycle" "' + userBindName + '_diceroll_0"\n';
 
+    // alias "myBind" "myBind0; myBind_cycle"
     output += '\nalias "' + userBindName + '" "' + userBindName + '0; ' + userBindName + '_cycle' + '" \n';
 
     output += "\n";
@@ -110,8 +112,18 @@ function createBinds() {
 
   // if the user wants to bind their script to a key
   if ( userBindKey != "" ) {
-    // myBind; myBind_cycle
-    var toBind = userBindName + "; " + userBindName + "_cycle"
+
+    var toBind = "";
+
+    if ( userBindRand ) {
+      // myBind; myBind_cycle
+      toBind = userBindName + "; " + userBindName + "_cycle";
+    }
+    else {
+      // myBind
+      toBind = userBindName;
+    }
+
     // bind "kp_pgup" "myBind; myBind_cycle"
     output += '\nbind "' + userBindKey + '" "' + toBind + '"\n';
   }
