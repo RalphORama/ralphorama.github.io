@@ -18,6 +18,11 @@ BeatThemUp.game = function (game) {
 
   // Platform groups
   this.platforms
+
+  // hero specific variables
+  this.jumping
+  this.jumpingTempY
+  this.minY
 }
 
 BeatThemUp.game.prototype =
@@ -27,7 +32,7 @@ BeatThemUp.game.prototype =
     this.physics.startSystem(Phaser.Physics.ARCADE)
 
     // Add the background sprite for the game
-    this.bg = this.add.sprite(0, this.game.height + 150, 'bg_grass')
+    this.bg = this.add.sprite(0, this.game.height + 100, 'bg_grass')
     this.bg.anchor.setTo(0, 1)
     this.bg.scale.setTo(0.8)
 
@@ -46,7 +51,55 @@ BeatThemUp.game.prototype =
   },
 
   update: function () {
+    // Make our hero collide with our platforms
     this.physics.arcade.collide(this.hero, this.platforms)
+
+    // Movement stuff
+    // Reset hero's velocity
+    this.hero.body.velocity.x = 0
+
+    // Handle keyboard input
+    if (this.keyRight.isDown) {
+      this.hero.body.velocity.x = 150
+      // Set the hero to face right
+      this.hero.scale.x = Math.abs(this.hero.scale.x)
+      this.hero.animations.play('walk', 10, true)
+    } else if (this.keyLeft.isDown) {
+      this.hero.body.velocity.x = -150
+      // Set the hero to face left
+      this.hero.scale.x = -1 * Math.abs(this.hero.scale.x)
+      this.hero.animations.play('walk', 10, true)
+    } else {
+      this.hero.animations.stop()
+      this.hero.frame = 0
+    }
+
+    // Handle vertical movement for the hero
+    // First make sure we're not jumping and we're within the movable range
+    if (this.jumping === false) {
+      // If the 'up' key is pressed
+      if (this.keyUp.isDown === true && this.hero.y > this.minY) {
+        this.hero.body.velocity.y = -100
+      } else if (this.keyDn.isDown === true) {
+        this.hero.body.velocity.y = 100
+      } else {
+        this.hero.body.velocity.y = 0
+      }
+    }
+
+    // If we're not jumping and the user wants to jump, start jumping
+    if (this.keyJump.isDown && this.jumping === false) {
+      this.jumping = true
+      this.jumpingTempY = this.hero.y
+      startJumping(this.hero)
+    }
+    // if we're jumping and the hero should come to rest, stop jumping
+    if (this.jumping === true) {
+      if (this.hero.y >= this.jumpingTempY) {
+        this.jumping = false
+        stopJumping(this.hero)
+      }
+    }
   }
 }
 
@@ -68,11 +121,34 @@ function createHero (thisGame) {
   // scale the hero
   thisGame.hero.scale.setTo(0.5)
 
+  // Add animation set
+  thisGame.hero.animations.add('walk')
+
   // Physics logic
   // Enable Physics for the hero
   thisGame.physics.arcade.enable(thisGame.hero)
-  // Set up some gravity
-  thisGame.hero.body.gravity.y = 300
+  // Set up some gravity - we won't use this for now
+  // thisGame.hero.body.gravity.y = 300
   // so he can't escape
-  thisGame.hero.collideWorldBounds = true
+  thisGame.hero.body.collideWorldBounds = true
+
+  // Set up hero vars
+  // He's not jumping
+  thisGame.jumping = false
+  // Set the temp y
+  thisGame.jumpingTempY = thisGame.hero.y
+
+  // Set up how far the hero can travel up the screen
+  thisGame.minY = 300
+}
+
+function startJumping (hero) {
+  hero.body.velocity.y = -500
+  hero.body.gravity.y = 1000
+  hero.y -= 1
+}
+
+function stopJumping (hero) {
+  hero.body.velocity.y = 0
+  hero.body.gravity.y = 0
 }
