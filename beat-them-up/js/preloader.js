@@ -39,6 +39,6 @@ BeatThemUp.preloader.prototype =
 
   create: function () {
     // Load the main game
-    this.state.start('game')
+    this.state.start('level-01')
   }
 }
