@@ -1,32 +1,26 @@
 var BeatThemUp = {}
 
-BeatThemUp.boot = function( game )
-{
-
+BeatThemUp.boot = function (game) {
 }
 
-BasicGame.Boot.prototype =
+BeatThemUp.boot.prototype =
 {
-  init: function()
-  {
+  init: function () {
     // disallow multi-touch
-    this.input.maxPointers = 1;
+    this.input.maxPointers = 1
 
     // pause the game if our browser tab loses focus
-    this.stage.disableVisibilityChange = true;
+    this.stage.disableVisibilityChange = true
   },
 
-  preload: function()
-  {
+  preload: function () {
     // load assets required for the preloader
-    this.load.image( 'preloadBG',  'img/preload/preloadBG.png' )
-    this.load.image( 'preloadBar', 'img/preload/preloadBar.png' )
+    this.load.image('preloadBar', 'img/preload/preloadBar.png')
   },
 
-  create: function()
-  {
+  create: function () {
     // change the background color to match the page color
-    this.stage.backgroundColor = "#CCCCCC"
+    this.stage.backgroundColor = '#CCCCCC'
     // Start the preloader since we've already got everything we need set up
     this.state.start('preloader')
   }
