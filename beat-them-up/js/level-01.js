@@ -32,22 +32,27 @@ BeatThemUp.game.prototype =
     this.physics.startSystem(Phaser.Physics.ARCADE)
 
     // Add the background sprite for the game
-    this.bg = this.add.sprite(0, this.game.height + 100, 'bg_grass')
-    this.bg.anchor.setTo(0, 1)
-    this.bg.scale.setTo(0.8)
+    this.bg = this.add.tileSprite(0, 0, 1920, 800, 'bg_grass')
+    this.bg.anchor.setTo(0, 0)
+
+    // Set the world bounds
+    this.world.setBounds(0, 0, 1920, 800)
 
     // Set up the world!
-    createPlatforms(this)
+    // createPlatforms(this)
 
     // Initialize keys for keyboard input
-    this.keyRight = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT)
-    this.keyLeft = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT)
-    this.keyUp = this.game.input.keyboard.addKey(Phaser.Keyboard.UP)
-    this.keyDn = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN)
+    this.keyRight = this.game.input.keyboard.addKey(Phaser.Keyboard.D)
+    this.keyLeft = this.game.input.keyboard.addKey(Phaser.Keyboard.A)
+    this.keyUp = this.game.input.keyboard.addKey(Phaser.Keyboard.W)
+    this.keyDn = this.game.input.keyboard.addKey(Phaser.Keyboard.S)
     this.keyJump = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
 
     // Create the main character
     createHero(this)
+
+    // make the camera follow the hero
+    this.camera.follow(this.hero)
   },
 
   update: function () {
@@ -98,11 +103,13 @@ BeatThemUp.game.prototype =
       if (this.hero.y >= this.jumpingTempY) {
         this.jumping = false
         stopJumping(this.hero)
+        this.hero.y = this.jumpingTempY
+        console.log('Y: ' + this.hero.y)
       }
     }
   }
 }
-
+/*
 function createPlatforms (thisGame) {
   thisGame.platforms = thisGame.add.group()
   thisGame.platforms.enableBody = true
@@ -112,14 +119,15 @@ function createPlatforms (thisGame) {
     ground.body.immovable = true
   }
 }
+*/
 
 function createHero (thisGame) {
   // Create the hero!
-  thisGame.hero = thisGame.add.sprite(80, 400, 'Hero')
+  thisGame.hero = thisGame.add.sprite(0, 800, 'Hero')
     // Set his anchor to the middle
   thisGame.hero.anchor.x = 0.5
   // scale the hero
-  thisGame.hero.scale.setTo(0.5)
+  thisGame.hero.scale.setTo(0.35)
 
   // Add animation set
   thisGame.hero.animations.add('walk')
@@ -139,7 +147,7 @@ function createHero (thisGame) {
   thisGame.jumpingTempY = thisGame.hero.y
 
   // Set up how far the hero can travel up the screen
-  thisGame.minY = 300
+  thisGame.minY = 600
 }
 
 function startJumping (hero) {
