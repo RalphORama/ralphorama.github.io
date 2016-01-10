@@ -20,6 +20,7 @@ BeatThemUp.game = function (game) {
   this.platforms
 
   // hero specific variables
+  this.heroSpeed
   this.jumping
   this.jumpingTempY
   this.minY
@@ -84,9 +85,9 @@ BeatThemUp.game.prototype =
     if (this.jumping === false) {
       // If the 'up' key is pressed
       if (this.keyUp.isDown === true && this.hero.y > this.minY) {
-        this.hero.body.velocity.y = -100
+        this.hero.body.velocity.y = -1 * Math.abs(this.heroSpeed)
       } else if (this.keyDn.isDown === true) {
-        this.hero.body.velocity.y = 100
+        this.hero.body.velocity.y = Math.abs(this.heroSpeed)
       } else {
         this.hero.body.velocity.y = 0
       }
@@ -95,18 +96,27 @@ BeatThemUp.game.prototype =
     // If we're not jumping and the user wants to jump, start jumping
     if (this.keyJump.isDown && this.jumping === false) {
       this.jumping = true
+
       this.jumpingTempY = this.hero.y
+
       startJumping(this.hero)
     }
+
     // if we're jumping and the hero should come to rest, stop jumping
-    if (this.jumping === true) {
-      if (this.hero.y >= this.jumpingTempY) {
-        this.jumping = false
-        stopJumping(this.hero)
-        this.hero.y = this.jumpingTempY
-        console.log('Y: ' + this.hero.y)
-      }
+    if (this.hero.y >= this.jumpingTempY && this.jumping === true) {
+      // So this can't happen twice
+      this.jumping = false
+
+      stopJumping(this.hero)
+
+      // Set the hero back to where he used to be
+      this.hero.y = Math.round(this.jumpingTempY - 9)
     }
+  },
+
+  render: function () {
+    this.game.debug.text('Hero y: ' + this.hero.y, 10, 20)
+    this.game.debug.text('Temp y: ' + this.jumpingTempY, 10, 40)
   }
 }
 /*
@@ -141,6 +151,8 @@ function createHero (thisGame) {
   thisGame.hero.body.collideWorldBounds = true
 
   // Set up hero vars
+  // move speed
+  thisGame.heroSpeed = 150
   // He's not jumping
   thisGame.jumping = false
   // Set the temp y
