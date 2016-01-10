@@ -33,14 +33,14 @@ BeatThemUp.game.prototype =
     this.physics.startSystem(Phaser.Physics.ARCADE)
 
     // Add the background sprite for the game
-    this.bg = this.add.tileSprite(0, 0, 1920, 800, 'bg_grass')
-    this.bg.anchor.setTo(0, 0)
+    this.bg = this.add.sprite(0, 0, 'bg_iso_01')
 
     // Set the world bounds
-    this.world.setBounds(0, 0, 1920, 800)
+    this.world.setBounds(0, 0, 3200, 600)
 
     // Set up the world!
     // createPlatforms(this)
+    createWorldGeometry(this)
 
     // Initialize keys for keyboard input
     this.keyRight = this.game.input.keyboard.addKey(Phaser.Keyboard.D)
@@ -58,7 +58,7 @@ BeatThemUp.game.prototype =
 
   update: function () {
     // Make our hero collide with our platforms
-    this.physics.arcade.collide(this.hero, this.platforms)
+    this.physics.arcade.collide(this.hero, this.worldGeometry)
 
     // Movement stuff
     // Reset hero's velocity
@@ -103,7 +103,7 @@ BeatThemUp.game.prototype =
     }
 
     // if we're jumping and the hero should come to rest, stop jumping
-    if (this.hero.y >= this.jumpingTempY && this.jumping === true) {
+    if (this.hero.y > this.jumpingTempY && this.jumping === true) {
       // So this can't happen twice
       this.jumping = false
 
@@ -115,10 +115,12 @@ BeatThemUp.game.prototype =
   },
 
   render: function () {
-    this.game.debug.text('Hero y: ' + this.hero.y, 10, 20)
-    this.game.debug.text('Temp y: ' + this.jumpingTempY, 10, 40)
+    this.game.debug.text('Hero x: ' + r2p(this.hero.x), 10, 20)
+    this.game.debug.text('Hero y: ' + r2p(this.hero.y), 10, 35)
+    this.game.debug.text('Temp y: ' + r2p(this.jumpingTempY), 10, 50)
   }
 }
+
 /*
 function createPlatforms (thisGame) {
   thisGame.platforms = thisGame.add.group()
@@ -131,13 +133,25 @@ function createPlatforms (thisGame) {
 }
 */
 
+function createWorldGeometry (thisGame) {
+  thisGame.worldGeometry = thisGame.add.group()
+  thisGame.worldGeometry.enableBody = true
+
+  // create first blocking element
+  var wall = thisGame.worldGeometry.create(30, 400, 'plat_grass')
+  wall.body.immovable = true
+  wall.angle = 60
+}
+
 function createHero (thisGame) {
   // Create the hero!
   thisGame.hero = thisGame.add.sprite(0, 800, 'Hero')
     // Set his anchor to the middle
   thisGame.hero.anchor.x = 0.5
   // scale the hero
-  thisGame.hero.scale.setTo(0.35)
+  thisGame.hero.scale.setTo(0.4)
+
+  thisGame.hero.position.setTo(145, 467)
 
   // Add animation set
   thisGame.hero.animations.add('walk')
@@ -159,7 +173,7 @@ function createHero (thisGame) {
   thisGame.jumpingTempY = thisGame.hero.y
 
   // Set up how far the hero can travel up the screen
-  thisGame.minY = 600
+  thisGame.minY = 380
 }
 
 function startJumping (hero) {
@@ -171,4 +185,10 @@ function startJumping (hero) {
 function stopJumping (hero) {
   hero.body.velocity.y = 0
   hero.body.gravity.y = 0
+}
+
+// For debugging purposes
+// r2p - rounds a number to 2 places
+function r2p (input) {
+  return Math.round(input * 100) / 100
 }

@@ -22,6 +22,7 @@ BeatThemUp.preloader.prototype =
     this.load.image('bg_desert', 'img/background/colored_desert.png')
     this.load.image('bg_grass', 'img/background/colored_grass.png')
     this.load.image('bg_land', 'img/background/colored_land.png')
+    this.load.image('bg_iso_01', 'img/background/iso-bg-1.jpg')
 
     // Pickups
     this.load.image('coin_diamond', 'img/items/coinDiamond.png')
