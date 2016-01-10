@@ -30,7 +30,7 @@ BeatThemUp.game.prototype =
 {
   create: function () {
     // REV UP THAT PHYSICS ENGINE
-    this.physics.startSystem(Phaser.Physics.ARCADE)
+    this.physics.startSystem(Phaser.Physics.NINJA)
 
     // Add the background sprite for the game
     this.bg = this.add.sprite(0, 0, 'bg_iso_01')
@@ -115,9 +115,10 @@ BeatThemUp.game.prototype =
   },
 
   render: function () {
-    this.game.debug.text('Hero x: ' + r2p(this.hero.x), 10, 20)
-    this.game.debug.text('Hero y: ' + r2p(this.hero.y), 10, 35)
-    this.game.debug.text('Temp y: ' + r2p(this.jumpingTempY), 10, 50)
+    this.game.debug.spriteInfo(this.hero, 10, 20)
+
+    // Show the collision bounds of our hero
+    this.game.debug.body(this.hero)
   }
 }
 
@@ -140,7 +141,6 @@ function createWorldGeometry (thisGame) {
   // create first blocking element
   var wall = thisGame.worldGeometry.create(30, 400, 'plat_grass')
   wall.body.immovable = true
-  wall.angle = 60
 }
 
 function createHero (thisGame) {
@@ -164,6 +164,9 @@ function createHero (thisGame) {
   // so he can't escape
   thisGame.hero.body.collideWorldBounds = true
 
+  // let there be some overlap when the hero collides with something
+  thisGame.hero.body.overlapY = -500
+
   // Set up hero vars
   // move speed
   thisGame.heroSpeed = 150
@@ -185,10 +188,4 @@ function startJumping (hero) {
 function stopJumping (hero) {
   hero.body.velocity.y = 0
   hero.body.gravity.y = 0
-}
-
-// For debugging purposes
-// r2p - rounds a number to 2 places
-function r2p (input) {
-  return Math.round(input * 100) / 100
 }
