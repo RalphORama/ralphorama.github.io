@@ -139,7 +139,7 @@ function createWorldGeometry (thisGame) {
   thisGame.worldGeometry.enableBody = true
 
   // create first blocking element
-  var wall = thisGame.worldGeometry.create(30, 400, 'plat_grass')
+  var wall = thisGame.worldGeometry.create(30, 500, 'plat_grass')
   wall.body.immovable = true
 }
 
@@ -165,7 +165,9 @@ function createHero (thisGame) {
   thisGame.hero.body.collideWorldBounds = true
 
   // let there be some overlap when the hero collides with something
-  thisGame.hero.body.overlapY = -500
+  var tempHeight = thisGame.hero.body.height
+  console.log(tempHeight)
+  thisGame.hero.body.setSize(thisGame.hero.body.x * 0.95, 50, 0, tempHeight - 23)
 
   // Set up hero vars
   // move speed
