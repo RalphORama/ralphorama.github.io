@@ -40,9 +40,9 @@ function createBinds() {
   userBindList = userBindList.split("\n");
   for ( var i = 0; i < userBindList.length; ++i ) {
     // Check to make sure the message isn't too long
-    // TF2 has a max char count of 128
-    if ( userBindList[i].length > 128 ) {
-      alert( "One of your messages is longer than 128 characters, the maximum length for a chat message." );
+    // TF2 has a max char count of 229
+    if ( userBindList[i].length > 229 ) {
+      alert( "One of your messages is longer than 229 characters, the maximum length for a chat message." );
       selectTextAreaLine( document.getElementById("phrases"), i );
       return false;
     }
