@@ -1,5 +1,5 @@
 // Version number
-var version = "1.1";
+var version = "1.2";
 
 // Prevent the form from resetting itself when the user submits it
 $("#generator-form").submit(function(event){
@@ -40,7 +40,7 @@ function createBinds() {
   userBindList = userBindList.split("\n");
   for ( var i = 0; i < userBindList.length; ++i ) {
     // Check to make sure the message isn't too long
-    // TF2 has a max char count of 229
+    // Most Source Engine games have a max char count of 229
     if ( userBindList[i].length > 229 ) {
       alert( "One of your messages is longer than 229 characters, the maximum length for a chat message." );
       selectTextAreaLine( document.getElementById("phrases"), i );
@@ -81,8 +81,8 @@ function createBinds() {
   var output = "";
 
   // Add a comment so the user knows what version the script was generated with
-  output += "// Generated with TF2 Chatterbox v" + version +"\n";
-  output += "// http://ralphorama.github.io/tf2-chatterbox/\n\n";
+  output += "// Generated with ChatterBox for Source v" + version +"\n";
+  output += "// http://ralphorama.github.io/\n\n";
 
   for ( var i = 0; i < userBindList.length; ++i ) {
     output += userBindList[i] + "\n";
@@ -145,7 +145,7 @@ function createBinds() {
   // Add the watermark if people want it
   if ( userAddWMark ) {
     // Handle the watermark in its own function as well
-    output += coolWaterMark();
+    output += coolWatermark();
   }
 
   outputField.value = output.trim();
@@ -190,7 +190,7 @@ function generateRandomBinds( bindArray, bindName ) {
 }
 
 // Just returns a cool watermark, put here for orginization.
-function coolWaterMark() {
+function coolWatermark() {
   var toReturn = "\n";
   toReturn += 'echo ".__                    .___         .___"\n';
   toReturn += 'echo "|  |   _________     __| _/____   __| _/"\n';
@@ -199,7 +199,7 @@ function coolWaterMark() {
   toReturn += 'echo "|____/\\____(____  /\\____ |\\___  >____ | "\n';
   toReturn += 'echo "                \\/      \\/    \\/     \\/ "\n';
   toReturn += 'echo "Congrats! You just loaded some cool binds."\n';
-  toReturn += 'echo "Generated with love at http://ralphorama.github.io/tf2-chatterbox/"\n';
+  toReturn += 'echo "Generated with love at http://ralphorama.github.io/"\n';
 
   return toReturn;
 }
