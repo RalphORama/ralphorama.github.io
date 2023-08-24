@@ -17,7 +17,7 @@
  */
 
 // Version number
-var version = "1.2.1";
+var version = "1.2.2";
 
 // Prevent the form from resetting itself when the user submits it
 $("#generator-form").submit(function(event){
