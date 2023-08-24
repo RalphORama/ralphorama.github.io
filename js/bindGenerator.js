@@ -57,6 +57,12 @@ function createBinds() {
   // Populate the array of aliases
   userBindList = userBindList.split("\n");
   for ( var i = 0; i < userBindList.length; ++i ) {
+    // Preserve comments starting with //
+    if ( userBindsList[i].startsWith('//') {
+      output += userBindsList[i];
+      continue;
+    }
+    
     // Check to make sure the message isn't too long
     // Most Source Engine games have a max char count of 229
     if ( userBindList[i].length > 229 ) {
