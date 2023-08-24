@@ -58,8 +58,8 @@ function createBinds() {
   userBindList = userBindList.split("\n");
   for ( var i = 0; i < userBindList.length; ++i ) {
     // Preserve comments starting with //
-    if ( userBindsList[i].startsWith('//') ) {
-      output += userBindsList[i];
+    if ( userBindList[i].startsWith('//') ) {
+      output += userBindList[i];
       continue;
     }
     
