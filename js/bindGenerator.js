@@ -54,12 +54,15 @@ function createBinds() {
   // END FORM VALIDATION
   // ------------------------------
 
+  var fixedIndex = 0;
+
   // Populate the array of aliases
   userBindList = userBindList.split("\n");
   for ( var i = 0; i < userBindList.length; ++i ) {
     // Preserve comments starting with //
     if ( userBindList[i].startsWith('//') ) {
       output += userBindList[i];
+      fixedIndex -= 1;
       continue;
     }
     
@@ -72,7 +75,7 @@ function createBinds() {
     }
 
     // create Bind Number Name, e.g. mybindlist1, mybindlist23
-    var bindNumber = '"' + userBindName + i +'" ';
+    var bindNumber = '"' + userBindName + fixedIndex +'" ';
 
     // set up the first part of the alias
     // e.g. alias "mybindlist23" "inputString";
@@ -86,7 +89,7 @@ function createBinds() {
       var newAlias = "";
       if ( i + 1 < userBindList.length ) {
         // alias myAlias myAlias01"
-        newAlias = "alias " + userBindName + " " + userBindName + (i + 1) + '"';
+        newAlias = "alias " + userBindName + " " + userBindName + (fixedIndex + 1) + '"';
       }
       else {
         newAlias = "alias " + userBindName + " " + userBindName + 0 + '"';
@@ -97,6 +100,8 @@ function createBinds() {
     else {
       userBindList[i] = "alias " + bindNumber + "\"say " + userBindList[i] + "\"";
     }
+
+    fixedIndex += 1;
   }
 
   // ------------------------------
@@ -182,7 +187,14 @@ function generateRandomBinds( bindArray, bindName ) {
   // create an empty array that we'll fill with lines of aliases for randomizing
   var arrayForRandomizing = [];
 
+  var fixedIndex = 0;
+
   for ( var i = 0; i < bindArray.length; ++i ) {
+    if ( bindArray[i].startsWith('//') ) {
+      fixedIndex -= 1;
+      continue;
+    }
+
     // initialize the line we're going to push into the array we're returning
     var toPush;
 
@@ -192,7 +204,7 @@ function generateRandomBinds( bindArray, bindName ) {
 
     if ( i != bindArray.length - 1 ) {
       // e.g. myBind_diceroll_1
-      nextDiceName = bindName + "_diceroll_" + (i + 1);
+      nextDiceName = bindName + "_diceroll_" + (fixedIndex + 1);
     }
     else {
       // If we're in the last item in the array
@@ -202,10 +214,12 @@ function generateRandomBinds( bindArray, bindName ) {
 
     // Create full line
     // e.g. alias "myBind_diceroll_3" "alias myBind myBind3; alias myBind_cycle myBind_diceroll_4"
-    toPush = 'alias "' + diceName + '" "alias ' + bindName + ' ' + bindName + i + '; alias ' + bindName + '_cycle ' + nextDiceName + '"';
+    toPush = 'alias "' + diceName + '" "alias ' + bindName + ' ' + bindName + fixedIndex + '; alias ' + bindName + '_cycle ' + nextDiceName + '"';
 
     // push the line we just created into the array to return
     arrayForRandomizing.push( toPush );
+
+    fixedIndex += 1;
   }
 
   // return that whole goddamn array
