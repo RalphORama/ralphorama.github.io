@@ -62,10 +62,9 @@ function createBinds() {
     // Preserve comments starting with //
     if ( userBindList[i].startsWith('//') ) {
       output += userBindList[i];
-      fixedIndex -= 1;
       continue;
     }
-    
+
     // Check to make sure the message isn't too long
     // Most Source Engine games have a max char count of 229
     if ( userBindList[i].length > 229 ) {
@@ -75,7 +74,7 @@ function createBinds() {
     }
 
     // create Bind Number Name, e.g. mybindlist1, mybindlist23
-    var bindNumber = '"' + userBindName + (fixedIndex + 1) +'" ';
+    var bindNumber = '"' + userBindName + fixedIndex +'" ';
 
     // set up the first part of the alias
     // e.g. alias "mybindlist23" "inputString";
@@ -101,7 +100,7 @@ function createBinds() {
       userBindList[i] = "alias " + bindNumber + "\"say " + userBindList[i] + "\"";
     }
 
-    fixedIndex += 1;
+    ++fixedIndex;
   }
 
   // ------------------------------
@@ -126,6 +125,10 @@ function createBinds() {
     output += "\n";
 
     for ( var i = 0; i < randomizeArray.length; ++i ) {
+      if ( randomizeArray[i].startsWith('//') ) {
+        continue;
+      }
+
       output += randomizeArray[i] + "\n";
     }
 
@@ -191,7 +194,6 @@ function generateRandomBinds( bindArray, bindName ) {
 
   for ( var i = 0; i < bindArray.length; ++i ) {
     if ( bindArray[i].startsWith('//') ) {
-      fixedIndex -= 1;
       continue;
     }
 
@@ -203,7 +205,7 @@ function generateRandomBinds( bindArray, bindName ) {
     var toPush;
 
     // e.g. myBind_diceroll_3
-    var diceName = bindName + "_diceroll_" + i;
+    var diceName = bindName + "_diceroll_" + fixedIndex;
     var nextDiceName = "";
 
     if ( i != bindArray.length - 1 ) {
@@ -223,7 +225,7 @@ function generateRandomBinds( bindArray, bindName ) {
     // push the line we just created into the array to return
     arrayForRandomizing.push( toPush );
 
-    fixedIndex += 1;
+    ++fixedIndex;
   }
 
   // return that whole goddamn array
