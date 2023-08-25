@@ -65,6 +65,10 @@ function createBinds() {
       fixedIndex -= 1;
       continue;
     }
+
+    if ( fixedIndex < 0 ) {
+      fixedIndex = 0;
+    }
     
     // Check to make sure the message isn't too long
     // Most Source Engine games have a max char count of 229
@@ -193,6 +197,10 @@ function generateRandomBinds( bindArray, bindName ) {
     if ( bindArray[i].startsWith('//') ) {
       fixedIndex -= 1;
       continue;
+    }
+
+    if ( fixedIndex < 0 ) {
+      fixedIndex = 0;
     }
 
     // initialize the line we're going to push into the array we're returning
