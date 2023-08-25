@@ -65,10 +65,6 @@ function createBinds() {
       fixedIndex -= 1;
       continue;
     }
-
-    if ( fixedIndex < 0 ) {
-      fixedIndex = 0;
-    }
     
     // Check to make sure the message isn't too long
     // Most Source Engine games have a max char count of 229
@@ -79,7 +75,7 @@ function createBinds() {
     }
 
     // create Bind Number Name, e.g. mybindlist1, mybindlist23
-    var bindNumber = '"' + userBindName + fixedIndex +'" ';
+    var bindNumber = '"' + userBindName + (fixedIndex + 1) +'" ';
 
     // set up the first part of the alias
     // e.g. alias "mybindlist23" "inputString";
